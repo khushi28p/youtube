@@ -189,8 +189,8 @@ router.post('/like', checkAuth, async(req, res) => {
         await Video.findByIdAndUpdate(
             videoId,
             {
-                $addToSet: {likes: req.user._id},
-                $pull: {dislikes: req.user._id},
+                $addToSet: {likedBy: req.user._id},
+                $pull: {dislikedBy: req.user._id},
             }
         );
 
@@ -210,8 +210,8 @@ router.post('/dislike', checkAuth, async(req, res) => {
         await Video.findByIdAndUpdate(
             videoId,
             {
-                $addToSet: {dislikes: req.user._id},
-                $pull: {likes: res.user._id},
+                $addToSet: {dislikedBy: req.user._id},
+                $pull: {likedBy: res.user._id},
             }
         );
 
